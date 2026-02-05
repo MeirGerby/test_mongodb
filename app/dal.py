@@ -17,7 +17,10 @@ def get_employees_by_age_and_role():
     return list(data)
 
 def get_top_seniority_employees_excluding_hr():
-    data = collection.find({'department':{'$ne': 'HR'}}).sort('years_at_company',-1).limit(7)
+    data = collection.find(
+        {'department':{'$ne': 'HR'}}, 
+        {'_id':0}
+        ).sort('years_at_company',-1).limit(7)
     return list(data)
 
 def get_employees_by_age_or_seniority():
@@ -33,7 +36,8 @@ def get_managers_excluding_departments():
        {
         'job_role.title': 'Manager',
         'job_role.department': {'$nin': ['Sales', 'Marketing']},
-        }
+        },
+        {'_id':0}
                            )
     return list(data)
 

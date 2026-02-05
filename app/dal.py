@@ -13,7 +13,7 @@ def get_employees_by_age_and_role():
         {'$or':[
             {'job_role.title': 'Engineer'},
             {'job_role.title': 'Specialist'}]
-            ,'age': {'$gte': 30}, 'age': {'$lte':45}}, {'_id':0})
+            ,'age': {'$gte': 30, '$lte':45}}, {'_id':0})
     return list(data)
 
 def get_top_seniority_employees_excluding_hr():
@@ -54,6 +54,10 @@ def get_employees_by_lastname_and_age():
         }
                            )
     return list(data)
+
+def upload_json_file(file_data):
+    ins_result = collection.insert_one(file_data)
+    return f"Data inserted to MongoDB. ObjectId: {ins_result.inserted_id}"
 
 
 

@@ -1,4 +1,4 @@
-from fastapi import APIRouter 
+from fastapi import APIRouter, UploadFile, File
 import dal
 
 
@@ -28,3 +28,9 @@ def get_managers_excluding_departments():
 @router.get('/by-lastname-and-age')
 def get_employees_by_lastname_and_age():
     return dal.get_employees_by_lastname_and_age()
+
+@router.post("/uploadfile/")
+async def create_upload_file(file: UploadFile = File(...)):
+    from fastapi.encoders import jsonable_encoder
+    json_data = jsonable_encoder(file)
+    return dal.upload_json_file(json_data)

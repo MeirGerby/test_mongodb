@@ -41,7 +41,8 @@ def get_employees_by_lastname_and_age():
     data = collection.find(
        {
         'name': {'$regex': ' Wright$'},
-        'name': {'$regex': ' Nelson$'}
+        'name': {'$regex': ' Nelson$'},
+        'age': {'$lt': 35},
         },
         {
         '_id':0, 'name':1
@@ -51,4 +52,4 @@ def get_employees_by_lastname_and_age():
     return list(data)
 
 
-print(get_employees_by_lastname_and_age())
+

@@ -1,7 +1,7 @@
 from os import getenv
 from pymongo import MongoClient
 
-mongo_uri = getenv("MONGO_URI", "api")
+mongo_uri = getenv("MONGO_URI", "mongo")
 
 def get_collection():
     myclient = MongoClient(mongo_uri)

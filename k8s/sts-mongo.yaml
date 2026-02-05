@@ -1,35 +1,11 @@
-apiVersion: apps/v1
-kind: StatefulSet
+apiVersion: v1
+kind: Service
 metadata:
   name: mongo
 spec:
   selector:
-    matchLabels:
-      app: mongo
-  serviceName: "mongo"
-  replicas: 3
-  template:
-    metadata:
-      labels:
-        app: mongo
-    spec:
-      terminationGracePeriodSeconds: 10
-      containers:
-      - name: mongo
-        image: docker.io/library/mongo:7.0
-        ports:
-          - containerPort: 27017
-        volumeMounts:
-          - name: mongo-persistent-storage
-            mountPath: /data/db
-      - name: mongo-sidecar
-        image: cvallance/mongo-k8s-sidecar
-  volumeClaimTemplates:
-    - metadata:
-        name: mongo-persistent-storage
-      spec:
-        storageClassName: "fast"
-        accessModes: ["ReadWriteOnce"]
-        resources:
-          requests:
-            storage: 1Gi
+    app: mongo
+  ports:
+    - port: 27017
+      targetPort: 27017
+  clusterIP: None

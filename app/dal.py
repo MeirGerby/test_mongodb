@@ -28,5 +28,27 @@ def get_employees_by_age_or_seniority():
                            )
     return list(data)
 
+def get_managers_excluding_departments():
+    data = collection.find(
+       {
+        'job_role.title': 'Manager',
+        'job_role.department': {'$nin': ['Sales', 'Marketing']},
+        }
+                           )
+    return list(data)
 
-print(get_employees_by_age_or_seniority())
+def get_employees_by_lastname_and_age():
+    data = collection.find(
+       {
+        'name': {'$regex': ' Wright$'},
+        'name': {'$regex': ' Nelson$'}
+        },
+        {
+        '_id':0, 'name':1
+        ,'age':1, 'job_role.department': 1
+        }
+                           )
+    return list(data)
+
+
+print(get_employees_by_lastname_and_age())

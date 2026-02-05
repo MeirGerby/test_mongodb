@@ -1,9 +1,9 @@
 from fastapi import FastAPI 
-from routes import router 
+import routes 
 
 app = FastAPI()
 
-app.include_router(router)
+app.include_router(routes.router)
 
 
 if __name__ == "__main__":
